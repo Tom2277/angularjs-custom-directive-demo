@@ -1,0 +1,22 @@
+<table id="all-performer-table" class="table table-bordered table-striped">
+  <thead ng-init="sortType=colTwo; sortReverse=true ">
+    <tr>
+      <td sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='colOne'></td>
+      <td sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='colTwo'></td >
+      <td class="check-box-label">  
+       +<span style="color: red;"> -</span>
+     </td>
+   </tr>
+  </thead>  
+  <tr ng-repeat="item in listData.itemsInSet | orderBy:sortType:sortReverse" > 
+    <td ng-class="{limeHighlight: item.selected}" >
+      {{item[colOne]}}
+    </td>
+    <td>
+      {{item[colTwo]}}
+    </td>
+    <td>
+      <input type="checkbox" ng-model=item.selected ng-click="listData[checkAction](item)">
+    </td>
+  </tr>
+</table>

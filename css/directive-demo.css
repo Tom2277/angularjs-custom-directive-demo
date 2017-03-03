@@ -1,0 +1,31 @@
+.blue{
+  color: blue;
+}
+
+.limeHighlight, .limeHighlight td{
+  background-color: lime;
+  /*border-bottom: 3px solid #3c763d;*/
+  /*color: #3c763d;*/
+}
+
+.selected-item-list{
+  list-style: decimal inside;
+  /*background-color: lightblue*/
+  font-size: 1.5em;
+  padding: 0px;
+}
+
+.selected-item-rated{
+  border: 1px solid black;
+  border-radius: .5em;
+  padding: 10px;
+  /*margin-bottom: 10px;*/
+}
+
+.photo-display-list .photo-box{
+  height: 300px;
+  text-align: center;
+}
+.photo-display-list img{
+  height: 100%;
+}

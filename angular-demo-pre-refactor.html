@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+  <script src="js/list-data.js"></script>
+  <script src="js/angular-checklist-as.js"></script>
+</head>
+<body ng-app="demo-app">
+  <div class="container" ng-controller="RatingListController as list ">
+    <div class="col-md-12">
+      <div class="col-md-3 master-list">
+        <table id="all-performer-table" class="table table-bordered table-striped">
+          <thead ng-init="sortType='score'; sortReverse=true ">
+            <tr>
+              <td>
+                <a href="#"  ng-click="sortType = '-name'; sortReverse = !sortReverse">
+                  Select From Below
+                  <span ng-show="sortType == '-name' && sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == '-name' && !sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a href="#" ng-click="sortType = 'score'; sortReverse = !sortReverse">
+                Score 
+                  <span ng-show="sortType == 'score' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'score' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td class="check-box-label">  
+               +<span style="color: red;"> -</span>
+              </td>
+            </tr>
+          </thead>  
+          <tr ng-repeat="item in list.itemsInSet | orderBy:sortType:sortReverse">
+            <td ng-class="{limeHighlight: item.selected}" >{{item.name}}</td>
+            <td>{{item.score}}</td>
+            <td><input type="checkbox" ng-model=item.selected ng-click="list.addOrRemoveFromRatedItems(item)"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4 selected-list">
+        <ol class="selected-item-list">
+          <li ng-repeat="selItem in list.ratedItems" class="selected-item-rated">
+            <span >{{selItem.name}}- {{selItem.$$hashKey}}</span>
+            <div class="list-making-tools pull-right" >
+              <span class="glyphicon glyphicon-remove-circle text-danger" ng-click="list.removeFromRatedItems(selItem)"></span>
+              <span class="glyphicon glyphicon-arrow-down text-warning " ng-click="list.moveDownRatedItems(selItem)"></span>
+              <span class="glyphicon glyphicon-arrow-up text-success" ng-click="list.moveUpRatedItems(selItem)"></span>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="col-md-5 demo-explanation ">
+        <div class="limeHighlight">
+          {{list.ratedItems}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="blue">
+        {{list.itemsInSet}}
+      </div> 
+    </div>
+  </div> <!-- end-container and demoAngularChecklistContrl-->
+</body>
+  
+    
+  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/demo-checklist.css">
+
+</html>

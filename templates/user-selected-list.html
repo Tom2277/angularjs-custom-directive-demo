@@ -1,0 +1,10 @@
+<ol class="selected-item-list">
+  <li ng-repeat="selItem in list.ratedItems" class="selected-item-rated">
+    <span >{{selItem.name}}</span>
+    <div class="list-making-tools pull-right" >
+      <span class="glyphicon glyphicon-remove-circle text-danger" ng-click="list.removeFromRatedItems(selItem)"></span>
+      <span class="glyphicon glyphicon-arrow-down text-warning " ng-click="list.moveDownRatedItems(selItem)"></span>
+      <span class="glyphicon glyphicon-arrow-up text-success" ng-click="list.moveUpRatedItems(selItem)"></span>
+    </div>
+  </li>
+</ol>
