@@ -5,9 +5,9 @@
     .module('demo-directive-app',['ngStorage'])
     .controller('RatingListController', RatingListController);
 
-    RatingListController.$inject = ['$scope', '$localStorage'];
+    RatingListController.$inject = ['$scope', '$localStorage','listRankingService'];
 
-    function RatingListController($scope, $localStorage){
+    function RatingListController($scope, $localStorage, listRankingService){
       var vm = this;
 
       vm.message = "test message from checklist as js";
@@ -42,23 +42,37 @@
       };
 
       function removeFromRatedItems(selectedItem){
-        var index = vm.ratedItems.indexOf(selectedItem);
-        var item = vm.itemsInSet.find(function(e){return e.name === selectedItem.name});
-          item.selected = false;
-        vm.ratedItems.splice(index, 1);
+        listRankingService.removeItem(selectedItem, vm.ratedItems, vm.itemsInSet);
+        // vm.ratedItems = listRankingService.removeItem(selectedItem, vm.ratedItems, vm.itemsInSet);
       };
 
       function moveUpRatedItems (selectedItem){
-        var index = vm.ratedItems.indexOf(selectedItem);
-        vm.ratedItems.splice(index, 1);
-        vm.ratedItems.splice(index-1, 0, selectedItem);
+        vm.ratedItems = listRankingService.moveUp(selectedItem, vm.ratedItems);
       };
 
       function moveDownRatedItems (selectedItem){
-        var index = vm.ratedItems.indexOf(selectedItem);
-        vm.ratedItems.splice(index, 1);
-        vm.ratedItems.splice(index+1, 0, selectedItem);
+        vm.ratedItems = listRankingService.moveDown(selectedItem, vm.ratedItems);
       };
+
+
+      // function removeFromRatedItems(selectedItem){
+      //   var index = vm.ratedItems.indexOf(selectedItem);
+      //   var item = vm.itemsInSet.find(function(e){return e.name === selectedItem.name});
+      //     item.selected = false;
+      //   vm.ratedItems.splice(index, 1);
+      // };
+
+      // function moveUpRatedItems (selectedItem){
+      //   var index = vm.ratedItems.indexOf(selectedItem);
+      //   vm.ratedItems.splice(index, 1);
+      //   vm.ratedItems.splice(index-1, 0, selectedItem);
+      // };
+
+      // function moveDownRatedItems (selectedItem){
+      //   var index = vm.ratedItems.indexOf(selectedItem);
+      //   vm.ratedItems.splice(index, 1);
+      //   vm.ratedItems.splice(index+1, 0, selectedItem);
+      // };
     }
 
 })()
