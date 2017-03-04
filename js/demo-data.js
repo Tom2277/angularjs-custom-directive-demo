@@ -17,3 +17,56 @@ var tomsPhotos = [
   { "title": "Backpacking in the Sierras", "year": 2009, "photo_url": "images/tom-backpack-sierras.png"},
   { "title": "Webcam Photo", "year": 2015, "photo_url": "images/tomnorian-webcam.jpg"}
 ];
+
+
+var friends = [
+  {
+    "age": 34,
+    "eyeColor": "blue",
+    "company": "MANTRO",
+    "friend": "Barton Rios",
+    "favoriteFruit": "apple"
+  },
+  {
+    "age": 31,
+    "eyeColor": "brown",
+    "company": "EXTRO",
+    "friend": "Williams Knowles",
+    "favoriteFruit": "apple"
+  },
+  {
+    "age": 25,
+    "eyeColor": "blue",
+    "company": "ZILLAR",
+    "friend": "Denise Everett",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "age": 21,
+    "eyeColor": "green",
+    "company": "SLUMBERIA",
+    "friend": "Fletcher Meadows",
+    "favoriteFruit": "banana"
+  },
+  {
+    "age": 20,
+    "eyeColor": "green",
+    "company": "DATAGENE",
+    "friend": "Simmons Wade",
+    "favoriteFruit": "apple"
+  },
+  {
+    "age": 34,
+    "eyeColor": "green",
+    "company": "PRIMORDIA",
+    "friend": "William Harding",
+    "favoriteFruit": "strawberry"
+  },
+  {
+    "age": 29,
+    "eyeColor": "blue",
+    "company": "FITCORE",
+    "friend": "Ellison Cervantes",
+    "favoriteFruit": "strawberry"
+  }
+]
