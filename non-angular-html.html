@@ -46,19 +46,18 @@
   </nav>
 <div class="container">
   <div class="col-md-12">
-    <h1>No Angular on this Page... and no use of angular ui router</h1>
+    <h1>No Angular on this Page... and no use of angular-ui-router</h1>
     <p>
-      Must manually create new navbar (or cut and paste of course). I have shown the downfalls that this can create by deliberate lack of care for look and feel of a navbar. 
+      For static pages you'll need to cut and paste the Navbar HTML using 'href's in place of the 'ui-sref's that you use to access view template 'pages' on a page managed by the angular-ui-router.
     </p>
 
-    <h2>(Perhaps I took the inconsistency too far?)</h2>
+    <h4>Of course, Cut and pasting leads to errors and inconsistency (which I have purposefully demonstrated!). Reverting to separate pages from consistently generated pages means more repetitive work for each change you make.</h4>
     
     <p>
-      You will also need to copy/paste all necessary CDN and style-sheet links in full separate head section
+      These freestanding pages will also require full HTML boilerplate including references to all the JS and Stylesheet documents.
     </p>
 
-    <h3>But you can <s>easily</s> <em>,with care,</em> mix and match legacy static HTML pages in with more modern AngularJS pages.</h3>
-  </div>
+    
 </div>
   
 </body>

@@ -19,12 +19,11 @@
   <bootstrap-navbar></bootstrap-navbar>
   <div class="container"  >
     <div class="col-md-12">
-      <h3>This is a less maintained demo page showing that you can still serve pages in the same app without using angular-ui through-out the entire site</h3>
-      <p>You might want to force page refreshes in that manner although the old days of page count ignoring rich JavaScript content changes are coming to an end.</p>
-      <p>Of course, you would have other original content instead of this duplicate demo page.</p>
-      <p>Note.. this will break some page links in your shared navbar that had used the single-page app router set-up. You can create an alternative re-usable nav-bar for those pages.(I've left these links broken on purpose)</p>
+      <h3>This is a less maintained demo-page demonstrating that you can hard-load a full HTML page with boilerplate within the same AngularJS app using the ui-router elsewhere.</h3>
+      <p>You might want to force page refreshes on content changes to force a refresh of ads views on new content. Thankfully the days of those needed work-arounds are coming to an end.</p>
+      <p>Note.. this will break some page links in your shared navbar.  You'll need a second navbar template without 'ui-sref' attributes for statically loaded pages.</p>
     </div>
-    <a class="btn btn-lrg" href="/#/angular-directive-demo" >Go to Real Directive Demo Page</a>
+    <a class="btn btn-lrg btn-primary" href="/#/angular-directive-demo" style="margin-bottom: 5px;">Go to Real Directive-Demo Page</a>
     <div class="col-md-12">
       <div class="first-two-columns" ng-controller="RatingListController as list ">
           <div class="col-md-3 master-list">
