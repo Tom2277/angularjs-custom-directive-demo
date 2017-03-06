@@ -1,0 +1,122 @@
+<html>
+<head>
+  <title>Tom Handle</title>
+  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+  <script src="js/demo-data.js"></script>
+  <script src="handlebars/js/handlebars-page.js"></script>
+  <script src="handlebars/js/rated-list-controller.js"></script>
+</head>
+<body>
+  <div id="navBar" ></div>
+  <div class="container">
+    <div class="col-md-12">
+        
+      <div id="master-list" class="col-md-3 master-list">
+        first list
+
+      </div>
+
+      <div id="rated-list" class="col-md-4 selected-list">
+        middle column
+      </div>
+
+      <div class="col-md-5">
+        <div id="third-col">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <script id="char-list-builder" type="text/x-handlebars-template">
+        
+    <table id="all-performer-table" class="table table-bordered table-striped">
+      <thead >
+        <tr>
+          {{> selectOne}}
+          <td>
+            <a href="#" >
+            Score 
+              <span  class="fa fa-caret-down"></span>
+              <span  class="fa fa-caret-up"></span>
+            </a>
+          </td>
+          <td class="check-box-label">  
+           +<span style="color: red;"> -</span>
+          </td>
+        </tr>
+      </thead> 
+      {{#each chars }}
+        <tr >
+          <td >{{this.name}}</td>
+          <td>{{this.score}}</td>
+          <td><input type="checkbox" 
+              id="masterList{{@index}}"
+              {{#if this.selected}}checked{{/if}}
+              onchange="addOrRemoveFromRatedList(this, '{{@index}}')"
+              >
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+  </script >
+
+  <script id="select-one-template" type="text/x-handlebars-template">
+    <td>
+      <a href="#"  >
+        Select One From Below
+        <span class="fa fa-caret-down"></span>
+        <span class="fa fa-caret-up"></span>
+      </a>
+    </td>
+  </script>
+
+
+  <script id="rated-list-builder" type="text/x-handlebars-template">
+    <ol class="selected-item-list">
+      {{#each ratedItems}}
+          <li  class="selected-item-rated">
+            <span >{{this.name}}</span>
+            <div class="list-making-tools pull-right" >
+              <span class="glyphicon glyphicon-remove-circle text-danger" onclick="removeFromRatedItems({{@index}})"></span>
+              <span class="glyphicon glyphicon-arrow-down text-warning" onclick="moveDownRatedItems({{@index}})"></span>
+              <span class="glyphicon glyphicon-arrow-up text-success" onclick="moveUpRatedItems({{@index}})"></span>
+            </div>
+          </li>
+      {{/each}}
+    <ol>
+  </script>
+
+
+
+  <script type="text/javascript">
+
+
+
+
+     // var selCharList = document.getElementById("char-list-builder").innerHTML;
+     // var templateCharList = Handlebars.compile(selCharList);
+     // var withCharData = templateCharList( {chars: starTrekChars});
+
+     // document.getElementById("master-list").innerHTML = withCharData;
+
+     // var ratedListBuilder = document.getElementById("rated-list-builder").innerHTML;
+     // var templateRatedList = Handlebars.compile(ratedListBuilder);
+     // var currentRated = templateRatedList( {ratedItems: ratedItems});
+
+     // document.getElementById("rated-list").innerHTML = currentRated;
+
+  </script>
+  
+  
+  
+</body>
+
+  <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/directive-demo.css">
+</html>

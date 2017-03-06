@@ -1,0 +1,35 @@
+<table id="all-performer-table" class="table table-bordered table-striped">
+  <thead >
+    <tr>
+      <td>
+        <a href="#"  >
+          Select From Below
+          <span class="fa fa-caret-down"></span>
+          <span class="fa fa-caret-up"></span>
+        </a>
+      </td>
+      <td>
+        <a href="#" >
+        Score 
+          <span  class="fa fa-caret-down"></span>
+          <span  class="fa fa-caret-up"></span>
+        </a>
+      </td>
+      <td class="check-box-label">  
+       +<span style="color: red;"> -</span>
+      </td>
+    </tr>
+  </thead> 
+  {{#each chars }}
+    <tr >
+      <td >{{this.name}}</td>
+      <td>{{this.score}}</td>
+      <td><input type="checkbox" 
+          id="masterList{{@index}}"
+          {{#if this.selected}}checked{{/if}}
+          onchange="addOrRemoveFromRatedList(this, '{{@index}}')"
+          >
+      </td>
+    </tr>
+  {{/each}}
+</table>

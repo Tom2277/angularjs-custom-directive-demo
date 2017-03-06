@@ -8,6 +8,6 @@ Your mileage my vary.
 
 * down and dirty use of angular-ui-router on a simple mixed/static site
 
-Read my [AngularJS custom directive blogpost](http://tomnorian.com/angularjs-directives-with-actions.html)for more thoughts and comments.
+Read my [AngularJS custom directive blogpost](http://tomnorian.com/angularjs-directives-with-actions.html) for more thoughts and comments.
 
 Or [click for a live demo of this repository](http://rankarooski.com/#/angular-directive-demo).
