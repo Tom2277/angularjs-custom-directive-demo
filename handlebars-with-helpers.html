@@ -1,0 +1,88 @@
+<html>
+<head>
+  <title>Helpers Handlebars</title>
+  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+  <script src="handlebars/demo-handlebars-data.js"></script>
+  <script src="handlebars/js/handlebars-with-helpers.js"></script>
+  <script src="handlebars/js/rated-list-controller.js"></script>
+</head>
+<body>
+  <div id="navBar" ></div>
+  <div id="main-content" class="container">
+
+  </div>
+
+
+<script id="for-main" type="text/x-handlebars-template">
+      
+  <div class="col-md-12">
+      
+    <div class="col-md-3 master-list">
+      <div id="chartable1">
+        {{makeDataTable  colNames= 'name,score' listName = "starTrekChars" checkAction = "chooseRatingItem" domContainerID = "chartable1"}}
+      </div>
+    </div>
+
+    <div class="col-md-4 selected-list">
+      middle column
+    </div>
+
+    <div class="col-md-5  photo-display-list">
+      <div id="phototable1">
+        {{makeDataTable  colNames= 'title,year,category' listName = "tomsPhotos" checkAction = "chooseDisplayItem"  domContainerID="phototable1" toDisplay="photo_url"}}
+      </div>
+    </div>
+  </div>
+      
+</script>
+
+<script id="make-data-table" type="text/x-handlebars-template">
+  {{#if toDisplay}}
+    <div id="{{domID}}display" class="photo-box">
+        
+    </div>
+  {{/if}}
+  <div id="{{domID}}table">
+    <table id="all-performer-table" class="table table-bordered table-striped">
+      <thead >
+        <tr>
+        {{#colNames}}
+          <td>
+            <a href="#" onclick="sortByCol('{{../domID}}', '{{this}}')" >
+              {{this}}
+              <span class="fa fa-caret-down"></span>
+              <span class="fa fa-caret-up"></span>
+            </a>
+          </td>
+        {{/colNames}}
+          <td class="check-box-label">  
+           +<span style="color: red;"> -</span>
+          </td>
+        </tr>
+      </thead> 
+      {{#items}}
+        <tr >
+          {{#each ../colNames}}
+            <td>{{lookup ../this this}}</td>
+          {{/each}}
+          <td>
+            <input type="checkbox" 
+              id="masterList{{@index}}"
+              {{#if this.selected}}checked{{/if}}
+              onchange="{{../checkAction}}('{{../domID}}', {{@index}})";
+            >
+          </td>
+        </tr>
+      {{/items}}
+    </table>
+  </div>
+</script>
+
+</body>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/directive-demo.css">
+</html>  
