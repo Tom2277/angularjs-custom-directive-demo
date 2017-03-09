@@ -1,0 +1,1 @@
+{{#ifeq this ../this.sortCol[0]}} is Active {{/ifeq}}

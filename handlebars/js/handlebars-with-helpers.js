@@ -3,14 +3,15 @@ $( document ).ready(function() {
       $("#navBar").html(navBar);
     });
 
-    // there is a global variable "demoHandlebarsData" object/ you could get data via ajax instead
-     
     initMain();
 
 });
-  var ourHBdataStore = {} //will hold region list data created by helpers
-  var toggleOrder = true; //todo: get rid of this global initiator;
+  //globals
+  //variable "demoHandlebarsData" contains demo data/ you could get data via Ajax instead   
+  var ourHBdataStore = {} //each table helper will populate this with both data and table state info
+  var toggleOrder = true; //all lists on the page share one asc/desc operator 
 
+  //create and insert page layout
   function initMain(){
     var forMainTemplate = document.getElementById("for-main").innerHTML;
     var forMainBuilder = Handlebars.compile(forMainTemplate);
@@ -20,52 +21,93 @@ $( document ).ready(function() {
   }
   
   function addListToStore(data){
-    console.log("did toDisplay get to storage? : ", data.toDisplay)
-    ourHBdataStore[data.domID] = {};
-    ourHBdataStore[data.domID].listName= data.listName;   
-    ourHBdataStore[data.domID].colNames= data.colNames;   
-    ourHBdataStore[data.domID].items= data.items;   
-    ourHBdataStore[data.domID].checkAction= data.checkAction;
-    ourHBdataStore[data.domID].toDisplay= data.toDisplay;
+    console.log("did sortCol get to storage? : ", data.sortCol);
+    var domID = data.domID;
+    ourHBdataStore[domID] = {};
+    ourHBdataStore[domID].listName= data.listName;   
+    ourHBdataStore[domID].colNames= data.colNames;   
+    ourHBdataStore[domID].items= data.items;   
+    ourHBdataStore[domID].checkAction= data.checkAction;
+    ourHBdataStore[domID].toDisplay= data.toDisplay;
 
+    //adds a selected state to each item
     setAllUnchecked(data.items);
+    //
+    setSortCol(domID, data.sortCol[0], data.sortCol[1]);
+    // ourHBdataStore[domID].sortCol = [data.sortCol[0], data.sortCol[1]];
+    sortTable(domID, ourHBdataStore[domID].sortCol.col, data.sortCol[1]);
+    // sortTable(domID, ourHBdataStore[domID].sortCol[0], data.sortCol[1]);
   }
 
   //helpers
   Handlebars.registerHelper("makeDataTable",function(options){
-      var makeDataTableTemplate =   document.getElementById("make-data-table").innerHTML;
       var colNames = (options.hash.colNames).split(',');
+      // toDisplay extra data for actions (like a destination ID) - false if omitted
       var toDisplay = options.hash.toDisplay || false;
-      console.log("display is : ", toDisplay);
-      // we could wrap the following in an ajax call to retrieve external items data
-      var tableData = { colNames: colNames, items : demoHandlebarsData[options.hash.listName], listName: options.hash.listName, checkAction: options.hash.checkAction, domID: options.hash.domContainerID, toDisplay: toDisplay };
+      // sort defaults '1,false' would be by col index 1 desc
+      var sortColRaw = (options.hash.sortDefaults) ? (options.hash.sortDefaults).split(",") : [0, true];
+      var sortCol = [colNames[sortColRaw[0]], sortColRaw[1]];
+      console.log("this is the sortCol", sortCol);
+      // you could wrap the following in an ajax call to retrieve external items data
+      var tableData = { colNames: colNames, items : demoHandlebarsData[options.hash.listName], listName: options.hash.listName, checkAction: options.hash.checkAction, domID: options.hash.domContainerID, toDisplay: toDisplay , sortCol: sortCol};
       addListToStore(tableData);
+      //standard handlebars HTML generation
+      var makeDataTableTemplate =   document.getElementById("make-data-table").innerHTML;
       var makeDataTableBuilder = Handlebars.compile(makeDataTableTemplate);
       var builtMasterList = makeDataTableBuilder(tableData);
-
+      // as this is a helper, the HTML will be returned, not inserted.
       return new Handlebars.SafeString(builtMasterList);
   });
+  
+  Handlebars.registerHelper('ifeq', (a, b, options) => {
+    if (a === b) {
+      return options.fn(this)
+    }
+    return options.inverse(this)
+  });
+  
+
+  function setSortCol(domID, col, ascend){
+    ourHBdataStore[domID].sortCol = { col: col, ascend: ascend};
+  }
+
 
   function redrawTable(domID){
     var makeDataTableTemplate =   document.getElementById("make-data-table").innerHTML;
     var thisTable = ourHBdataStore[domID];
-    var tableData = { colNames: thisTable.colNames, items : thisTable.items, listName: thisTable.listName, checkAction: thisTable.checkAction, domID: domID, toDisplay: thisTable.toDisplay };
+    var tableData = { colNames: thisTable.colNames, items : thisTable.items, listName: thisTable.listName, checkAction: thisTable.checkAction, domID: domID, toDisplay: thisTable.toDisplay, sortCol:[ thisTable.sortCol.col, thisTable.sortCol.ascend] };
     var makeDataTableBuilder = Handlebars.compile(makeDataTableTemplate);
     var builtMasterList = makeDataTableBuilder(tableData);
     var IDdomID = "#" + domID;
     $(IDdomID).html(builtMasterList);
   }  
 
-  function sortByCol(domID, colName){
-    console.log('got to sortByCol domID, colName', domID, colName);
-    toggleOrder = !toggleOrder;
-    // colName = "title";
+  function sortTable(domID, colName, ascend){
     var items = ourHBdataStore[domID].items;
-    ourHBdataStore[domID].items = toggleOrder ? items.sort(function(a,b){ return a[colName] - b[colName]}) : items.sort(function(a,b){ return b[colName] - a[colName]});
-    redrawTable(domID);
+    var compareColValsDescend = function(b,a){
+      var aCol =  $.isNumeric(a[colName]) ? a[colName] : a[colName].toString().toLowerCase() ;
+      var bCol =  $.isNumeric(b[colName]) ? b[colName] : b[colName].toString().toLowerCase() ;
+      return ((aCol < bCol) ? -1 : 1);
+    };
+    var compareColValsAscend = function(a,b){
+      var aCol =  $.isNumeric(a[colName]) ? a[colName] : a[colName].toString().toLowerCase() ;
+      var bCol =  $.isNumeric(b[colName]) ? b[colName] : b[colName].toString().toLowerCase() ;
+      return ((aCol < bCol) ? -1 : 1);
+    };
+    ourHBdataStore[domID].items = (ascend) ? items.sort(compareColValsAscend): items.sort(compareColValsDescend);
   }
 
-
+  function sortByCol(domID, colName){
+    var tableSortCol = ourHBdataStore[domID].sortCol;
+    if (colName === tableSortCol.col){
+      tableSortCol.ascend = !tableSortCol.ascend;
+    }else{
+      tableSortCol.col = colName;
+    }
+    sortTable(domID, colName, tableSortCol.ascend);
+    redrawTable(domID);
+  }
+    
 
   function chooseDisplayItem(domID, index){
     // console.log("first the domID and then the index", domID, index);

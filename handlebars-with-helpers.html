@@ -26,9 +26,13 @@
 
     <div class="col-md-4 selected-list">
       middle column
+      
     </div>
 
     <div class="col-md-5  photo-display-list">
+      <div class="handlebars-display-field">
+        <div id="phototable1display" class="">You could have Default Content Here</div>
+      </div>
       <div id="phototable1">
         {{makeDataTable  colNames= 'title,year,category' listName = "tomsPhotos" checkAction = "chooseDisplayItem"  domContainerID="phototable1" toDisplay="photo_url"}}
       </div>
@@ -38,45 +42,43 @@
 </script>
 
 <script id="make-data-table" type="text/x-handlebars-template">
-  {{#if toDisplay}}
-    <div id="{{domID}}display" class="photo-box">
-        
-    </div>
-  {{/if}}
-  <div id="{{domID}}table">
-    <table id="all-performer-table" class="table table-bordered table-striped">
-      <thead >
-        <tr>
-        {{#colNames}}
-          <td>
-            <a href="#" onclick="sortByCol('{{../domID}}', '{{this}}')" >
-              {{this}}
-              <span class="fa fa-caret-down"></span>
-              <span class="fa fa-caret-up"></span>
-            </a>
-          </td>
-        {{/colNames}}
-          <td class="check-box-label">  
-           +<span style="color: red;"> -</span>
-          </td>
-        </tr>
-      </thead> 
-      {{#items}}
-        <tr >
-          {{#each ../colNames}}
-            <td>{{lookup ../this this}}</td>
-          {{/each}}
-          <td>
-            <input type="checkbox" 
-              id="masterList{{@index}}"
-              {{#if this.selected}}checked{{/if}}
-              onchange="{{../checkAction}}('{{../domID}}', {{@index}})";
-            >
-          </td>
-        </tr>
-      {{/items}}
-    </table>
-  </div>
+  <table id="all-performer-table" class="table table-bordered table-striped">
+    <thead >
+      <tr>
+      {{#colNames}}
+        <td>
+          <a href="#" onclick="sortByCol('{{../domID}}', '{{this}}')" >
+            {{this}}
+            {{#ifeq this ../this.sortCol.[0]}}
+              {{#if ../../this.sortCol.[1]}}
+                <span class="fa fa-caret-down"></span>
+              {{else}}
+                <span class="fa fa-caret-up"></span>
+              {{/if}}
+            {{/ifeq}}
+          </a>
+        </td>
+      {{/colNames}}
+        <td class="check-box-label">  
+         +<span style="color: red;"> -</span>
+        </td>
+      </tr>
+    </thead> 
+    {{#items}}
+      <tr >
+        {{#each ../colNames}}
+          <td>{{lookup ../this this}}</td>
+        {{/each}}
+        <td>
+          <input type="checkbox" 
+            id="masterList{{@index}}"
+            {{#if this.selected}}checked{{/if}}
+            onchange="{{../checkAction}}('{{../domID}}',{{@index}})";
+          >
+        </td>
+      </tr>
+    {{/items}}
+  </table>
 </script>
 
 </body>
