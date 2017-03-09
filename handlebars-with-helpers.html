@@ -1,40 +1,74 @@
 <html>
 <head>
-  <title>Helpers Handlebars</title>
+  <title>Sortable Table Helper Handlebars</title>
   <script src="lib/jquery-3.1.1.min.js"></script>
   <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
   <script src="handlebars/demo-handlebars-data.js"></script>
   <script src="handlebars/js/handlebars-with-helpers.js"></script>
-  <script src="handlebars/js/rated-list-controller.js"></script>
+  <script src="handlebars/js/handlebars-sortable-table-helper.js"></script>
+  <script src="handlebars/js/helper-rated-list-controller.js"></script>
+  <script src="handlebars/js/helper-photo-display-controller.js"></script>
 </head>
 <body>
   <div id="navBar" ></div>
-  <div id="main-content" class="container">
+  <div id="main-content" class="container"></div>
 
-  </div>
+<!-- there are three templates below -->
+<!-- in production, you would be to precompile these templates on a local devlopment machine -->
+<!-- an alternative would be to keep them in separate template files and use ajax to compile them all at once -->
+<!-- see old converstation at http://javascriptissexy.com/handlebars-js-tutorial-learn-everything-about-handlebars-js-javascript-templating/ -->
 
+<!-- I am using a Bootstrap set up the page in this demo -->
+<!-- You would set up your page layout in the manner of your own choosing then -->
+<!-- use the sortableDataTable helpers as often and wherever you choose  -->
+<!-- I use the "sortableDataTable" helper 4 times.  -->
+<!-- Separately, I use a naming convention to provide landing zones for the "checkActions" I passed to those tables.   -->
+<!-- Those demo functions show how you could additionally use the helper to insert and update content anywhere on the dom. -->
 
 <script id="for-main" type="text/x-handlebars-template">
       
-  <div class="col-md-12">
+  <div class="col-md-12">  
+    <div class="col-md-3">
       
-    <div class="col-md-3 master-list">
       <div id="chartable1">
-        {{makeDataTable  colNames= 'name,score' listName = "starTrekChars" checkAction = "chooseRatingItem" domContainerID = "chartable1"}}
+        {{sortableDataTable  domContainerID = "chartable1" dataKey ="starTrekChars" colNames= 'name,score'  checkAction="addOrRemoveFromRatedList"}}
       </div>
-    </div>
-
-    <div class="col-md-4 selected-list">
-      middle column
+      <p>
+        This handlebars sortable table helper can use the same data independently as you can see above and below. The helperabove is passed a 'checkAction' parameter and sorted intially by score. The same character list below sorts alphabetically initially and has no checkbox as it was not given an action. The lower list was also passed custom column labels through the helper.
+      </p>
       
+      <div id="chartable2" >
+        {{sortableDataTable  domContainerID = "chartable2" dataKey ="starTrekChars" colNames= 'name,score' colLabels='Star Trek Characters,Rating' }}
+      </div>
+    
+    </div>
+    <div class="col-md-4 selected-list">
+      <div id="chartable1rating" ></div>
     </div>
 
-    <div class="col-md-5  photo-display-list">
+    <div class="col-md-5">
+      
+      <p>
+        The box below is simply a dom element with an id that a demo checkAction inserts images into. It's not a part of the sortable-data-table helper directly.
+      </p>
       <div class="handlebars-display-field">
-        <div id="phototable1display" class="">You could have Default Content Here</div>
+        <div id="phototable1display" >
+          Chose a Photo
+        </div>
       </div>
-      <div id="phototable1">
-        {{makeDataTable  colNames= 'title,year,category' listName = "tomsPhotos" checkAction = "chooseDisplayItem"  domContainerID="phototable1" toDisplay="photo_url"}}
+      <p>The table created below is also passed a 'checkAction' ...which is just a name for a function in a controller not associated with the sortable data table helper. I've included an actionOptions optional parameter to give a helper user more oppotunity to customize a shared action by table.
+      </p>
+      
+      <div id="phototable1" >
+        {{sortableDataTable domContainerID="phototable1" dataKey="tomsPhotos" colNames="title,year,category" colLabels="Pics of Tom,Year,Activity"
+        checkAction="chooseDisplayItem"  actionOptions="photo_url"}}
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div id="phototable2" >
+      {{sortableDataTable domContainerID="phototable2" dataKey="tomsPhotos" colNames="title,year,category" colLabels="Pics of Tom,Year,Activity"
+        checkAction="chooseDisplayItem"  actionOptions="photo_url"}}
       </div>
     </div>
   </div>
@@ -47,8 +81,8 @@
       <tr>
       {{#colNames}}
         <td>
-          <a href="#" onclick="sortByCol('{{../domID}}', '{{this}}')" >
-            {{this}}
+          <a class="co-header-link" onclick="sortByCol('{{../domID}}', '{{this}}')" >
+            {{lookup ../this.colLabels @index}}
             {{#ifeq this ../this.sortCol.[0]}}
               {{#if ../../this.sortCol.[1]}}
                 <span class="fa fa-caret-down"></span>
@@ -59,9 +93,11 @@
           </a>
         </td>
       {{/colNames}}
-        <td class="check-box-label">  
-         +<span style="color: red;"> -</span>
+      {{#if checkAction}}
+        <td class="check-box-label"> 
+        +
         </td>
+      {{/if}}
       </tr>
     </thead> 
     {{#items}}
@@ -69,16 +105,33 @@
         {{#each ../colNames}}
           <td>{{lookup ../this this}}</td>
         {{/each}}
-        <td>
-          <input type="checkbox" 
-            id="masterList{{@index}}"
-            {{#if this.selected}}checked{{/if}}
-            onchange="{{../checkAction}}('{{../domID}}',{{@index}})";
-          >
-        </td>
+        {{#if ../checkAction}}
+          <td>
+            <input type="checkbox" 
+              id="masterList{{@index}}"
+              {{#if this.selected}}checked{{/if}}
+              onchange="{{../checkAction}}('{{../domID}}',{{@index}})";
+            >
+          </td>
+        {{/if}}
       </tr>
     {{/items}}
   </table>
+</script>
+
+<script id="rated-list-builder" type="text/x-handlebars-template">
+  <ol class="selected-item-list">
+    {{#each ratedItems}}
+        <li  class="selected-item-rated">
+          <span >{{this.name}}</span>
+          <div class="list-making-tools pull-right" >
+            <span class="glyphicon glyphicon-remove-circle text-danger" onclick="removeFromRatedItems({{@index}},'{{../domID}}')"></span>
+            <span class="glyphicon glyphicon-arrow-down text-warning" onclick="moveDownRatedItems({{@index}},'{{../domID}}')"></span>
+            <span class="glyphicon glyphicon-arrow-up text-success" onclick="moveUpRatedItems({{@index}},'{{../domID}}')"></span>
+          </div>
+        </li>
+    {{/each}}
+  <ol>
 </script>
 
 </body>
