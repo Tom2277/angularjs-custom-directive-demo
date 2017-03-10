@@ -3,7 +3,7 @@
   var ourHBdataStore = {}; //each table helper will populate this with both data and table state info
 
 //helpers
-Handlebars.registerHelper("sortableDataTable",function(options){
+Handlebars.registerHelper("sortableTableHelper",function(options){
   var colNames = (options.hash.colNames).split(',');
   //fancy colNames.. for display not for retrieval
   var colLabels = (options.hash.colLabels) ? (options.hash.colLabels).split(',') : colNames;
@@ -11,6 +11,7 @@ Handlebars.registerHelper("sortableDataTable",function(options){
   var actionOptions = options.hash.actionOptions || false;
   // sort defaults '1,false' would be by col index 1 descending
   var sortColRaw = (options.hash.sortDefaults) ? (options.hash.sortDefaults).split(",") : [0, true];
+  sortColRaw[1] = (sortColRaw[1] !== 'false');
   var sortCol = [colNames[sortColRaw[0]], sortColRaw[1]];
   // you could wrap the following in an ajax call to retrieve external items data
   var tableData = { colNames: colNames, colLabels:colLabels ,items : demoHandlebarsData[options.hash.dataKey], dataKey: options.hash.dataKey, checkAction: options.hash.checkAction, domID: options.hash.domContainerID, actionOptions: actionOptions , sortCol: sortCol};
@@ -44,6 +45,7 @@ function addListToStore(data){
   ourHBdataStore[domID].items= data.items;
   ourHBdataStore[domID].checkAction= data.checkAction;
   ourHBdataStore[domID].actionOptions= data.actionOptions;
+  console.log("the domId sort default is: ", domID, data.sortCol);
   ourHBdataStore[domID].sortCol = { col: data.sortCol[0], ascend: data.sortCol[1]};
 
   //adds a selected/ state to each data item imported
@@ -87,11 +89,6 @@ function sortByCol(domID, colName){
   sortTable(domID, colName, tableSortCol.ascend);
   redrawTable(domID);
 }
-
-// function chooseRatingItem(domID, index){
-//   console.log("first the domID and then the index", domID, index);
-// }
-
 
 function setAllUnchecked(items){
   items.forEach( function(e){

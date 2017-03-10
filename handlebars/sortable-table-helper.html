@@ -1,13 +1,13 @@
 <html>
 <head>
   <title>Sortable Table Helper Handlebars</title>
-  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script src="/lib/jquery-3.1.1.min.js"></script>
   <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
-  <script src="handlebars/demo-handlebars-data.js"></script>
-  <script src="handlebars/js/handlebars-with-helpers.js"></script>
-  <script src="handlebars/js/handlebars-sortable-table-helper.js"></script>
-  <script src="handlebars/js/helper-rated-list-controller.js"></script>
-  <script src="handlebars/js/helper-photo-display-controller.js"></script>
+  <script src="/handlebars/demo-handlebars-data.js"></script>
+  <script src="/handlebars/js/demo-handlebars-main.js"></script>
+  <script src="/handlebars/js/handlebars-sortable-table-helper.js"></script>
+  <script src="/handlebars/js/helper-rated-list-controller.js"></script>
+  <script src="/handlebars/js/helper-photo-display-controller.js"></script>
 </head>
 <body>
   <div id="navBar" ></div>
@@ -20,8 +20,8 @@
 
 <!-- I am using a Bootstrap set up the page in this demo -->
 <!-- You would set up your page layout in the manner of your own choosing then -->
-<!-- use the sortableDataTable helpers as often and wherever you choose  -->
-<!-- I use the "sortableDataTable" helper 4 times.  -->
+<!-- use the sortableTableHelper helpers as often and wherever you choose  -->
+<!-- I use the "sortableTableHelper" helper 4 times.  -->
 <!-- Separately, I use a naming convention to provide landing zones for the "checkActions" I passed to those tables.   -->
 <!-- Those demo functions show how you could additionally use the helper to insert and update content anywhere on the dom. -->
 
@@ -31,46 +31,53 @@
     <div class="col-md-3">
       
       <div id="chartable1">
-        {{sortableDataTable  domContainerID = "chartable1" dataKey ="starTrekChars" colNames= 'name,score'  checkAction="addOrRemoveFromRatedList"}}
+        {{sortableTableHelper  domContainerID = "chartable1" dataKey ="starTrekChars" colNames='name,score'  sortDefaults="1,false" checkAction="addOrRemoveFromRatedList"}}
       </div>
       <p>
         This handlebars sortable table helper can use the same data independently as you can see above and below. The helperabove is passed a 'checkAction' parameter and sorted intially by score. The same character list below sorts alphabetically initially and has no checkbox as it was not given an action. The lower list was also passed custom column labels through the helper.
       </p>
       
       <div id="chartable2" >
-        {{sortableDataTable  domContainerID = "chartable2" dataKey ="starTrekChars" colNames= 'name,score' colLabels='Star Trek Characters,Rating' }}
+        {{sortableTableHelper  domContainerID = "chartable2" dataKey ="starTrekChars" colNames= 'name,score' colLabels='Star Trek Characters,Rating' }}
       </div>
     
     </div>
+
+
     <div class="col-md-4 selected-list">
-      <div id="chartable1rating" ></div>
+      <div id="chartable1rating" > 
+        <p>Select</p><p>Items</p><p>from left</p><p>to create</p><p>a list!</p>
+      </div>
     </div>
 
     <div class="col-md-5">
       
       <p>
-        The box below is simply a dom element with an id that a demo checkAction inserts images into. It's not a part of the sortable-data-table helper directly.
+        The box below is not a part of the sortable-data-table helper.
       </p>
       <div class="handlebars-display-field">
         <div id="phototable1display" >
           Chose a Photo
         </div>
       </div>
-      <p>The table created below is also passed a 'checkAction' ...which is just a name for a function in a controller not associated with the sortable data table helper. I've included an actionOptions optional parameter to give a helper user more oppotunity to customize a shared action by table.
+      <p>If you include the checkAction paramater, a click will call that named function and pass it the table id and the items list index. In this case we have used a chooseDisplayItem action that inserts a photo in the DOM.
       </p>
       
       <div id="phototable1" >
-        {{sortableDataTable domContainerID="phototable1" dataKey="tomsPhotos" colNames="title,year,category" colLabels="Pics of Tom,Year,Activity"
+        {{sortableTableHelper domContainerID="phototable1" dataKey="tomsPhotos" colNames="title,year,category" colLabels="Pics of Tom,Year,Activity"
         checkAction="chooseDisplayItem"  actionOptions="photo_url"}}
       </div>
     </div>
 
     <div class="col-md-9">
+      
       <div id="phototable2" >
-      {{sortableDataTable domContainerID="phototable2" dataKey="tomsPhotos" colNames="title,year,category" colLabels="Pics of Tom,Year,Activity"
-        checkAction="chooseDisplayItem"  actionOptions="photo_url"}}
+      {{sortableTableHelper domContainerID="phototable2" dataKey="friends" colNames="friend,eyeColor,favoriteFruit,company,age" colLabels="My Friends,Eye-Color,Fruit,Works At,Age" sortDefaults="4,true"}}
       </div>
+    
     </div>
+  
+
   </div>
       
 </script>
@@ -81,7 +88,7 @@
       <tr>
       {{#colNames}}
         <td>
-          <a class="co-header-link" onclick="sortByCol('{{../domID}}', '{{this}}')" >
+          <span class="col-sort-header" onclick="sortByCol('{{../domID}}', '{{this}}')" >
             {{lookup ../this.colLabels @index}}
             {{#ifeq this ../this.sortCol.[0]}}
               {{#if ../../this.sortCol.[1]}}
@@ -90,7 +97,7 @@
                 <span class="fa fa-caret-up"></span>
               {{/if}}
             {{/ifeq}}
-          </a>
+          </span>
         </td>
       {{/colNames}}
       {{#if checkAction}}
@@ -135,9 +142,9 @@
 </script>
 
 </body>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/directive-demo.css">
+<script src="/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/directive-demo.css">
 </html>  

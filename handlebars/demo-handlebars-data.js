@@ -13,11 +13,11 @@ var demoHandlebarsData ={
     {"name":"Khan Noorien Singh","score":2}],
 
   tomsPhotos : [
-    { "title": "Moose Rover", "year": 1988, category :"adventure", "photo_url": "images/tom-landrover-moose.png"},
-    { "title": "Canal Boat", "year": 2003, category:"vacation","photo_url": "images/canal-boat-france.png"},
-    { "title": "Young Commercial Broker", category:"work" ,"year": 1998, "photo_url": "images/young-commercial-real-estate-broker.png"},
-    { "title": "Backpacking in the Sierras", "year": 2009, category:"vacation", "photo_url": "images/tom-backpack-sierras.png"},
-    { "title": "Webcam Photo", "year": 2015, category:"work", "photo_url": "images/tomnorian-webcam.jpg"}
+    { "title": "Moose Rover", "year": 1988, category :"adventure", "photo_url": "tom-landrover-moose.png"},
+    { "title": "Canal Boat", "year": 2003, category:"vacation","photo_url": "canal-boat-france.png"},
+    { "title": "Young Commercial Broker", category:"work" ,"year": 1998, "photo_url": "young-commercial-real-estate-broker.png"},
+    { "title": "Backpacking in the Sierras", "year": 2009, category:"vacation", "photo_url": "tom-backpack-sierras.png"},
+    { "title": "Webcam Photo", "year": 2015, category:"work", "photo_url": "tomnorian-webcam.jpg"}
   ],
 
 

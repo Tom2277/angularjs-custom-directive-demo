@@ -1,3 +1,5 @@
+// this file handles a sample action to display a photo in a DOM element while using the
+// handlebars sortable table helper
 var ratedList = [];
 
 function redrawRatedList(domID){
@@ -12,13 +14,13 @@ function redrawRatedList(domID){
 
 function addOrRemoveFromRatedList (domID, index){
   var masterItem = ourHBdataStore[domID].items[index];
-  var itemRated = ratedList.find(function(e){return e.name === masterItem.name});
+  var itemRated = ratedList.find(function(e){return e.name === masterItem.name;});
   if (!masterItem.selected){
     if (!itemRated){ratedList.push(masterItem);}//
     masterItem.selected = true;
   }else{
-    var index = ratedList.indexOf(itemRated);
-    ratedList.splice(index, 1);
+    var ratedIndex = ratedList.indexOf(itemRated);
+    ratedList.splice(ratedIndex, 1);
     masterItem.selected = false;
   }
   redrawRatedList(domID);

@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $.get('templates/bootstrap-navbar.html', function(navBar) {
+    $.get('/templates/bootstrap-navbar.html', function(navBar) {
       $("#navBar").html(navBar); //this is not a handlebars template - pure HTML
     });
     
@@ -16,5 +16,3 @@ function initMain(){
 
   document.getElementById("main-content").innerHTML = forMainHTML;
 }
-  
-  

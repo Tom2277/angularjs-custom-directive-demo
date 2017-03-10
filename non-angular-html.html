@@ -7,57 +7,28 @@
   <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/directive-demo.css">
+  <script src="js/insert-navbar.js"></script>
+
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-       <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand active" href="/">Rankarooski.com Demos</a>
-    </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav nav-pills">
-          <li><a href="/#/angular-directive-demo">Real Directive Demo Page</a></li>
-
-          <li class=""><a href="UNROUTEDangular-directive-demo.html">With Angular, without Angular UI</a></li>
-        </ul>
-      </div>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Real About Links<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="http://tomnorian.com">AngularJS Blog Post</a></li>
-            <li><a href="#">About the Developer</a></li>
-            <li><a href="#">Bootstrap Navbar Blank</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Un-used Link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div> 
-  </nav>
+<div id="navBar"></div>
 <div class="container">
   <div class="col-md-12">
-    <h1>No Angular on this Page... and no use of angular-ui-router</h1>
+    <h3>This page has no AngularJS on it.</h3>
     <p>
-      For static pages you'll need to cut and paste the Navbar HTML using 'href's in place of the 'ui-sref's that you use to access view template 'pages' on a page managed by the angular-ui-router.
-    </p>
-
-    <h4>Of course, Cut and pasting leads to errors and inconsistency (which I have purposefully demonstrated!). Reverting to separate pages from consistently generated pages means more repetitive work for each change you make.</h4>
-    
+      It does not use the angular-ui routher either, of course. That will cause angular-ui-router links ('ui-ref') to break. Youll want a separate navbar with normal links to insert via JavaScript or cut and paste onto all of your non routed pages.</p>
     <p>
-      These freestanding pages will also require full HTML boilerplate including references to all the JS and Stylesheet documents.
+      The router is great in terms of page reload time, and of course, it keeps you from generating separate pages with navbars and src references.</p>
+    <p>
+      Sometimes, however, you -Do- want a fresh page reload when your content changes. If you're running site with advertising on it for example, your client may feel that they've earned a new page view when there is  new content on the page?! </p>
+    <p>
+      Or maybe a client is attached to a HTML image map they made in 2003? Or perhaps they have legacy pages with many back links to them that they want to maintain as landing and soft-redirecting pages?</p>
+    <h3>
+      It's simple to use AngularJS on some pages and not others is simple when a site is up on simple s3 bucket and/or HTTP server.
+    </h3>
+    <p>
+      Of course, rich dynamic sites are rarely that simple.
     </p>
-
-    
 </div>
   
 </body>
