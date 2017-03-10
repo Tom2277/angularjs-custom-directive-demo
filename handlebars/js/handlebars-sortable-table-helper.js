@@ -19,7 +19,7 @@ Handlebars.registerHelper("sortableTableHelper",function(options){
   addListToStore(tableData);
   // tableData[sortCol] = ourHBdataStore.sortCol;
   // standard handlebars HTML generation: Get HB template, compile to function, feed it data, place in dom
-  var makeDataTableTemplate =   document.getElementById("make-data-table").innerHTML;
+  var makeDataTableTemplate =   document.getElementById("create-sortable-table").innerHTML;
   var makeDataTableBuilder = Handlebars.compile(makeDataTableTemplate);
   var builtMasterList = makeDataTableBuilder(tableData);
   // as this is a helper, the HTML will be returned, not inserted.
@@ -45,7 +45,6 @@ function addListToStore(data){
   ourHBdataStore[domID].items= data.items;
   ourHBdataStore[domID].checkAction= data.checkAction;
   ourHBdataStore[domID].actionOptions= data.actionOptions;
-  console.log("the domId sort default is: ", domID, data.sortCol);
   ourHBdataStore[domID].sortCol = { col: data.sortCol[0], ascend: data.sortCol[1]};
 
   //adds a selected/ state to each data item imported
@@ -55,7 +54,7 @@ function addListToStore(data){
 }
 
 function redrawTable(domID){
-  var makeDataTableTemplate =   document.getElementById("make-data-table").innerHTML;
+  var makeDataTableTemplate =   document.getElementById("create-sortable-table").innerHTML;
   var thisTable = ourHBdataStore[domID];
   var tableData = { colNames: thisTable.colNames, colLabels: thisTable.colLabels, items : thisTable.items, dataKey: thisTable.dataKey, checkAction: thisTable.checkAction, domID: domID, actionOptions: thisTable.actionOptions, sortCol:[ thisTable.sortCol.col, thisTable.sortCol.ascend] };
   var makeDataTableBuilder = Handlebars.compile(makeDataTableTemplate);
