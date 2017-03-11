@@ -1,0 +1,75 @@
+{"demoHandlebarsData" :{
+
+  "starTrekChars" :[
+    {"name":"Jean-Luc Picard","score":50, "ID": "stc001"},
+    {"name":"Spock","score":40, "ID": "stc002"},
+    {"name":"James T. Kirk","score":30 , "ID": "stc003"},
+    {"name":"William Riker","score":25 , "ID": "stc004"},
+    {"name":"Quark","score":20 , "ID": "stc007"},
+    {"name":"Scotty","score":15 , "ID": "stc006"},
+    {"name":"Q","score":10, "ID": "stc008"},
+    {"name":"Miles O'Brien","score":5, "ID": "stc009"},
+    {"name":"Warf","score":4, "ID": "stc010"},
+    {"name":"Khan Noorien Singh","score":2, "ID": "stc011"}],
+
+  "tomsPhotos" : [
+    { "title": "Moose Rover", "year": 1988, "category" :"adventure", "photo_url": "tom-landrover-moose.png", "ID": "tp001"},
+    { "title": "Canal Boat", "year": 2003, "category":"vacation","photo_url": "canal-boat-france.png", "ID": "tp002"},
+    { "title": "Young Commercial Broker", "category":"work" ,"year": 1998, "photo_url": "young-commercial-real-estate-broker.png", "ID": "tp003"},
+    { "title": "Backpacking in the Sierras", "year": 2009, "category":"vacation", "photo_url": "tom-backpack-sierras.png", "ID": "tp004"},
+    { "title": "Webcam Photo", "year": 2015, "category":"work", "photo_url": "tomnorian-webcam.jpg", "ID": "tp005"}
+  ],
+
+
+  "friends" : [
+    { "ID": "fre001",
+      "age": 34,
+      "eyeColor": "blue",
+      "company": "MANTRO",
+      "friend": "Barton Rios",
+      "favoriteFruit": "apple"
+    },
+    { "ID": "fre002",
+      "age": 31,
+      "eyeColor": "brown",
+      "company": "EXTRO",
+      "friend": "Williams Knowles",
+      "favoriteFruit": "apple"
+    },
+    { "ID": "fre003",
+      "age": 25,
+      "eyeColor": "blue",
+      "company": "ZILLAR",
+      "friend": "Denise Everett",
+      "favoriteFruit": "strawberry"
+    },
+    { "ID": "fre004",
+      "age": 21,
+      "eyeColor": "green",
+      "company": "SLUMBERIA",
+      "friend": "Fletcher Meadows",
+      "favoriteFruit": "banana"
+    },
+    { "ID": "fre005",
+      "age": 20,
+      "eyeColor": "green",
+      "company": "DATAGENE",
+      "friend": "Simmons Wade",
+      "favoriteFruit": "apple"
+    },
+    { "ID": "fre006",
+      "age": 34,
+      "eyeColor": "green",
+      "company": "PRIMORDIA",
+      "friend": "William Harding",
+      "favoriteFruit": "strawberry"
+    },
+    { "ID": "fre007",
+      "age": 29,
+      "eyeColor": "blue",
+      "company": "FITCORE",
+      "friend": "Ellison Cervantes",
+      "favoriteFruit": "strawberry"
+    }
+  ]
+}}

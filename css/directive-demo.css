@@ -23,6 +23,7 @@
 .photo-display-list .photo-box{
   height: 300px;
   text-align: center;
+  position:relative;
 }
 .photo-display-list img{
   height: 100%;
