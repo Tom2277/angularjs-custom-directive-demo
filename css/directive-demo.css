@@ -46,6 +46,11 @@
 
 .col-sort-header:hover{
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.list-making-tools .glyphicon{
+  cursor: pointer;
 }
 
 .table-striped>tbody>tr:nth-of-type(odd){

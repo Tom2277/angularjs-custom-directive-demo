@@ -48,7 +48,7 @@ function addListToStore(data){
   ourHBdataStore[domID].orderSetting = { col: data.orderSetting[0], ascend: data.orderSetting[1]};
 
   // adds a selected/ state to each data item imported
-  // setAllUnchecked(data.items);
+  setAllUnchecked(data.items);
   // sort data by col and ascend/descend set or defaults(default is first column ascending)
   sortTable(domID, data.orderSetting[0], data.orderSetting[1]);
 }
