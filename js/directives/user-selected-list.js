@@ -5,6 +5,6 @@ angular
   function userSelectedList(){
 
     return {
-      templateUrl: 'templates/user-selected-list.html'
+      templateUrl: 'templates/directives/user-selected-list.html'
     };
   };

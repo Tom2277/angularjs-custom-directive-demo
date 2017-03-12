@@ -7,6 +7,6 @@ angular
   function bootstrapNavbar(){
 
     return {
-      templateUrl: 'templates/bootstrap-navbar-angular-ui.html'
+      templateUrl: 'templates/directives/bootstrap-navbar-angular-ui.html'
     };
   };

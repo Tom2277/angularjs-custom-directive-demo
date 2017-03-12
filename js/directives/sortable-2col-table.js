@@ -11,6 +11,6 @@ angular
         colTwo : "=colTwo",
         checkAction : "=checkAction"
       },
-      templateUrl: 'templates/sortable-table.html'
+      templateUrl: 'templates/directives/sortable-table-two-col.html'
     };
   };

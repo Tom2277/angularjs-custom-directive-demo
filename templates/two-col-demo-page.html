@@ -1,8 +1,8 @@
-<!-- create mutli-column sortable tables -->
-<div class="col-md-12"> 
+<!-- PAGE uses the first 2 col sortable table version -->
+<div class="col-md-12">
   <div class="first-two-columns" ng-controller="RatingListController as list ">
     <div class="col-md-3 master-list">
-      <sortable-table list-data="list" col-one="'name'" col-two="'score'" check-action="'addOrRemoveFromRatedItems'"></sortable-table>
+      <sortable-table-two-col list-data="list" col-one="'name'" col-two="'score'" check-action="'addOrRemoveFromRatedItems'"></sortable-table>
     </div>
     <div class="col-md-4 selected-list">
       <user-selected-list></user-selected-list>
@@ -12,7 +12,7 @@
     <div class="photo-box">
       <img ng-src="{{photos.chosenPhoto.photo_url}}" alt="{{photos.chosenPhoto.title}}">
     </div>
-    <sortable-table list-data="photos" col-one="'title'" col-two="'year'" check-action="'pickPhoto'"></sortable-table>
+    <sortable-table-two-col list-data="photos" col-one="'title'" col-two="'year'" check-action="'pickPhoto'"></sortable-table>
   </div> <!-- end PhotoDisplayController -->
 </div>
 

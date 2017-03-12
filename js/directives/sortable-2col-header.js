@@ -10,6 +10,6 @@ angular
         innerReverse : "=innerReverse",
         innerType : "=innerType"
       },
-      templateUrl: 'templates/sortable-table-header-cell.html'
+      templateUrl: 'templates/directives/sortable-table-header-cell.html'
     };
   };

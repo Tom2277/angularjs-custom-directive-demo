@@ -7,10 +7,10 @@ angular
     return {
       scope: {
         listData : "=listData",
-        colsDisplayed : "=colOne",
-        colsLabels : "=colOne",
+        colsDisplayed : "=colsDisplayed",
+        colsLabels : "=colsLabels",
         checkAction : "=checkAction"
       },
-      templateUrl: 'templates/sortable-table.html'
+      templateUrl: 'templates/directives/sortable-table.html'
     };
   };
