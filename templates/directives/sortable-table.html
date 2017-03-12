@@ -1,15 +1,7 @@
 <!-- this is the template for the multi-col sortable table directive -->
 <table id="all-performer-table" class="table table-bordered table-striped">
-  <!-- {{colsDisplayed}}{{colsDisplayed[0]}} -->
-  <!-- <tr>
-    <td ng-repeat="label in colsLabels">{{label}}</td>
-    <td>+ -</td>
-  </tr> -->
   <thead ng-init="sortType=colsDisplayed[0]; sortReverse=true ;">
-    <h1>{{sortType}}</h1>
     <tr>
-      <!-- <td ng-repeat="label in colsLabels" sortable-table-header inner-reverse ='sortReverse' this-col='label'></td> -->
-      <!-- <td ng-repeat="label in colsLabels" sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='label'></td> -->
       <td ng-repeat="label in colsLabels">
         <a href=""  ng-click="$parent.sortType = label; $parent.sortReverse = !$parent.sortReverse";>
           {{label | uppercase }}
@@ -24,16 +16,9 @@
    </tr>
   </thead>  
   <tr ng-repeat="item in itemsInSet | orderBy:sortType:sortReverse" > 
-{{sortReverse}}
     <td ng-repeat="col in colsDisplayed" ng-class="{limeHighlight: item.selected}" >
       {{$parent.item[col]}}
     </td>
-    <!-- <td ng-class="{limeHighlight: item.selected}" >
-      {{item[colsDisplayed[0]]}}
-    </td> -->
-    <!-- <td>
-      {{item.score}}
-    </td> -->
     <td>
       {{checkAction}}<input type="checkbox" ng-model=item.selected ng-click="checkAction(item)" >
     </td>
