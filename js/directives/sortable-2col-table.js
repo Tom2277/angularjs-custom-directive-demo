@@ -1,8 +1,8 @@
 angular
   .module('demo-directive-app')
-  .directive('sortableTable', sortableTable);
+  .directive('sortableTableTwoCol', sortableTableTwoCol);
 
-  function sortableTable(){
+  function sortableTableTwoCol(){
 
     return {
       scope: {
