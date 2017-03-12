@@ -1,8 +1,8 @@
 angular
   .module('demo-directive-app')
-  .directive('sortableTableHeaderTwoCol', sortableTableHeaderTwoCol);
+  .directive('sortableTableHeader', sortableTableHeader);
 
-  function sortableTableHeaderTwoCol(){
+  function sortableTableHeader(){
 
     return {
       scope: {
@@ -10,6 +10,6 @@ angular
         innerReverse : "=innerReverse",
         innerType : "=innerType"
       },
-      templateUrl: 'templates/directives/sortable-two-col-header-cell.html'
+      templateUrl: 'templates/directives/sortable-table-header-cell.html'
     };
   };
