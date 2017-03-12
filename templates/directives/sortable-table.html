@@ -1,22 +1,41 @@
+<!-- this is the template for the multi-col sortable table directive -->
 <table id="all-performer-table" class="table table-bordered table-striped">
-  <thead ng-init="sortType=colTwo; sortReverse=true ">
+  <!-- {{colsDisplayed}}{{colsDisplayed[0]}} -->
+  <!-- <tr>
+    <td ng-repeat="label in colsLabels">{{label}}</td>
+    <td>+ -</td>
+  </tr> -->
+  <thead ng-init="sortType=colsDisplayed[0]; sortReverse=true ;">
+    <h1>{{sortType}}</h1>
     <tr>
-      <td sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='colOne'></td>
-      <td sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='colTwo'></td >
+      <!-- <td ng-repeat="label in colsLabels" sortable-table-header inner-reverse ='sortReverse' this-col='label'></td> -->
+      <!-- <td ng-repeat="label in colsLabels" sortable-table-header inner-type='sortType' inner-reverse ='sortReverse' this-col='label'></td> -->
+      <td ng-repeat="label in colsLabels">
+        <a href=""  ng-click="$parent.sortType = label; $parent.sortReverse = !$parent.sortReverse";>
+          {{label | uppercase }}
+          <span ng-show="$parent.sortType == label && $parent.sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="$parent.sortType == label && !$parent.sortReverse" class="fa fa-caret-up"></span>
+        </a>
+      </td >
       <td class="check-box-label">  
-       +<span style="color: red;"> -</span>
+       + {{sortType}}
+       <span style="color: red;"> -</span>
      </td>
    </tr>
   </thead>  
-  <tr ng-repeat="item in listData.itemsInSet | orderBy:sortType:sortReverse" > 
-    <td ng-class="{limeHighlight: item.selected}" >
-      {{item[colOne]}}
+  <tr ng-repeat="item in itemsInSet | orderBy:sortType:sortReverse" > 
+{{sortReverse}}
+    <td ng-repeat="col in colsDisplayed" ng-class="{limeHighlight: item.selected}" >
+      {{$parent.item[col]}}
     </td>
+    <!-- <td ng-class="{limeHighlight: item.selected}" >
+      {{item[colsDisplayed[0]]}}
+    </td> -->
+    <!-- <td>
+      {{item.score}}
+    </td> -->
     <td>
-      {{item[colTwo]}}
-    </td>
-    <td>
-      <input type="checkbox" ng-model=item.selected ng-click="listData[checkAction](item)">
+      {{checkAction}}<input type="checkbox" ng-model=item.selected ng-click="checkAction(item)" >
     </td>
   </tr>
 </table>

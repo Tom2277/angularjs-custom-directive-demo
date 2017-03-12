@@ -29,6 +29,7 @@ angular
       };
 
       function addOrRemoveFromRatedItems(selectedItem){
+        console.log("you are at addOrRemoveFromRatedItems")
         var matchItem = vm.ratedItems.find(function(e){return e.name === selectedItem.name});
         var index = vm.ratedItems.indexOf(matchItem);
         if (selectedItem.selected && (!matchItem)){

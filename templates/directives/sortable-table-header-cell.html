@@ -1,5 +1,9 @@
 <a href=""  ng-click="innerType = thisCol; innerReverse = !innerReverse">
-  {{thisCol | uppercase }}
+<!-- <a href=""  ng-click=" innerReverse = !innerReverse"> -->
+  {{thisCol | uppercase }}{{innerReverse}}
+  <!-- {{label | uppercase }} -->
+  <!-- <span ng-show="$parent.sortType == thisCol && innerReverse" class="fa fa-caret-down"></span> -->
+  <!-- <span ng-show="$parent.sortType == thisCol && !innerReverse" class="fa fa-caret-up"></span> -->
   <span ng-show="innerType == thisCol && innerReverse" class="fa fa-caret-down"></span>
   <span ng-show="innerType == thisCol && !innerReverse" class="fa fa-caret-up"></span>
 </a>
