@@ -47,10 +47,7 @@ function localStorageRetreiveOnPageLoad(){
 
 function markItemAsSelected(domID, storedItem){
     ourHBdataStore[domID].items.forEach(function(item){
-        console.log("boo it got away", item, storedItem);
-
         if (item.ID === storedItem.ID){ item.selected = true;
-            console.log("hurrah we found one", item, storedItem);
         }
     });
     redrawTable(domID);

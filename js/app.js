@@ -19,13 +19,7 @@
       }
 
 
-      var directiveDemo = {
-        name: 'angular-directive-demo',
-        url: '/angular-directive-demo',
-        templateUrl:'templates/two-col-demo-page.html'
-      }
-
-      var sortableTable = {
+      var sortableTableDirective = {
         name: 'sortable-table-directive',
         url: '/sortable-table-directive',
         templateUrl:'templates/sortable-table-directive-page.html'
@@ -37,8 +31,7 @@
 
       $stateProvider.state(helloState);
       $stateProvider.state(aboutState);
-      $stateProvider.state(directiveDemo);
-      $stateProvider.state(sortableTable);
+      $stateProvider.state(sortableTableDirective);
     })
     
 })()

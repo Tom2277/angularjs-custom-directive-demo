@@ -1,5 +1,4 @@
 <!-- this is the template for the multi-col sortable table directive -->
-{{sortCol}}{{sortDesc}}{{sortCol}}
 <table id="all-performer-table" class="table table-bordered table-striped">
   <thead >
     <tr>
@@ -25,7 +24,6 @@
       {{$parent.item[col]}}
     </td>
     <td>
-      <!-- <small>{{$parent.checkAction}}</small><input type="checkbox" ng-model=item.selected ng-click="listData[$parent.checkAction](item)" > -->
       <input type="checkbox" ng-model=item.selected ng-click="$parent.checkAction(item)" >
     </td>
   </tr>

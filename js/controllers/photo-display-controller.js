@@ -8,10 +8,10 @@ angular
     var vm = this;
 
     // NOTE - this is a hardwired very simple controller made only to show the sortable table
-    // directive in action. 
-    // To see how you would structure a controller for flexible repeated use 
-    // see my handlebars-sortable-table-helper repo at GitHub.
-    // The use of global variables within internal functions is NOT!!! the way to do it.
+    // directive in action. I made two quick controllers that could both be accessed by same directive
+    // To see a way a controllers can be structured for multiple uses within a controller
+    // see my handlebars-sortable-table-helper repo at github. 
+    // The local storage currently works only once per web site but multi-use in that other repository
     vm.itemsInSet = tomsPhotos;
     vm.$storage = $localStorage.$default({
       chosenPhoto: vm.itemsInSet[0]

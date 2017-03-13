@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $.get('/templates/bootstrap-navbar.html', function(navBar) {
+    $.get('/non-routed-navbar.html', function(navBar) {
       $("#navBar").html(navBar); //this is not a handlebars template - pure HTML
     });
 

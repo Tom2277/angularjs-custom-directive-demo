@@ -4,10 +4,11 @@ angular
 
     RatingListController.$inject = ['$scope', '$localStorage','listRankingService'];
 
-    //NOTE - this is a hardwired very simple controller made only to show the sortable table
+    // NOTE - this is a hardwired, very simple controller made only to show the sortable table
     // directive in action. I made two quick controllers that could both be accessed by same directive
-    // To see how you would structure a controller for multiple use itself 
+    // To see a way a controllers can be structured for multiple uses within a controller
     // see my handlebars-sortable-table-helper repo at github. 
+    // The local storage currently works only once per web site but multi-use in that other repository
 
     function RatingListController($scope, $localStorage, listRankingService){
       var vm = this;

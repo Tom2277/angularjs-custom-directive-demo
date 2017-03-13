@@ -13,7 +13,6 @@ angular
       link: function(scope, element, attrs){
         scope.colsDisplayed = attrs.colsDisplayed.split(',');
         scope.colsLabels = attrs.colsLabels.split(',');
-        // scope.defaultSort = scope.$eval(attrs.defaultSort);
         scope.sortCol = attrs.sortCol;
         scope.sortDesc = (attrs.sortDesc == "true");
         scope.itemsInSet = scope.listData.itemsInSet;

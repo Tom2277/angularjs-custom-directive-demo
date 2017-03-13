@@ -59,13 +59,12 @@ function localStorageSaveRatedList(domID){
   localStorage.setObj("storedRatedLists" , storedRatedLists);
 }
 
-function localStorageRetrieveOnLoad(){
+function localStorageRetrieveRatedListsOnLoad(){
   var storedRatedLists = localStorage.getObj("storedRatedLists");
   if (!storedRatedLists){
     storedRatedLists = {};
   }
   Object.keys(storedRatedLists).forEach(function(domIDkey){
-    // we currently only have one rating list but are preparing for it to be an object
     var thisList = storedRatedLists[domIDkey];
     ratedLists[domIDkey] = thisList;
     setTimeout(function(){
@@ -75,7 +74,7 @@ function localStorageRetrieveOnLoad(){
   });
 }
 
-
+// checkboxes for previously selected items need to be marked checked on new session
 function markRetrievedItemsSelected(domID, storedList){
   ourHBdataStore[domID].items.forEach(function(item){
     storedList.forEach(function(storedItem){
@@ -84,4 +83,5 @@ function markRetrievedItemsSelected(domID, storedList){
   });
   redrawTable(domID);
 }
-localStorageRetrieveOnLoad();
+
+localStorageRetrieveRatedListsOnLoad();
