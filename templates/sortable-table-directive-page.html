@@ -2,7 +2,7 @@
 <div class="col-md-12"> 
   <div class="first-two-columns" ng-controller="RatingListController as list ">
     <div class="col-md-3 master-list">
-      <sortable-table list-data="list" = items-in-set='{{list.itemsInSet}}' cols-displayed="name,score" cols-labels="Character,Rating"  check-action='addOrRemoveFromRatedItems'></sortable-table>
+      <tn-sortable-table list-data='list' cols-displayed="name,score" cols-labels="Character,Rating" check-action='addOrRemoveFromRatedItems' sort-col='score' sort-desc='true'></tn-sortable-table>
     </div>
     <div class="col-md-4 selected-list">
       <user-selected-list></user-selected-list>
@@ -12,7 +12,7 @@
     <div class="photo-box">
       <img ng-src="{{photos.chosenPhoto.photo_url}}" alt="{{photos.chosenPhoto.title}}">
     </div>
-    <!-- <sortable-table list-data="photos" cols-displayed="title,category,year" cols-labels="Photos of Tom,Activity,Year" check-action="'pickPhoto'"></sortable-table> -->
+    <tn-sortable-table list-data='photos' cols-displayed="title,category,year" cols-labels="Photos of Tom,Activity,Year" check-action="pickPhoto" sort-col='title' sort-desc='false'></tn-sortable-table>
   </div> <!-- end PhotoDisplayController -->
 </div>
 

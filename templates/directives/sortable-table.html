@@ -1,26 +1,32 @@
 <!-- this is the template for the multi-col sortable table directive -->
+{{sortCol}}{{sortDesc}}{{sortCol}}
 <table id="all-performer-table" class="table table-bordered table-striped">
-  <thead ng-init="sortType=colsDisplayed[0]; sortReverse=true ;">
+  <thead >
     <tr>
       <td ng-repeat="label in colsLabels">
-        <a href=""  ng-click="$parent.sortType = label; $parent.sortReverse = !$parent.sortReverse";>
-          {{label | uppercase }}
-          <span ng-show="$parent.sortType == label && $parent.sortReverse" class="fa fa-caret-down"></span>
-          <span ng-show="$parent.sortType == label && !$parent.sortReverse" class="fa fa-caret-up"></span>
+        <a href=""  ng-click="
+          $parent.sortCol == $parent.colsDisplayed[$index]
+          ? $parent.sortDesc = !$parent.sortDesc
+          : $parent.sortCol = $parent.colsDisplayed[$index]"
+        >
+          {{label}}
+          <span ng-show="$parent.sortCol == $parent.colsDisplayed[$index] && $parent.sortDesc" class="fa fa-caret-down"></span>
+          <span ng-show="$parent.sortCol == $parent.colsDisplayed[$index] && !$parent.sortDesc" class="fa fa-caret-up"></span>
         </a>
       </td >
       <td class="check-box-label">  
-       + {{sortType}}
+       + 
        <span style="color: red;"> -</span>
      </td>
    </tr>
   </thead>  
-  <tr ng-repeat="item in itemsInSet | orderBy:sortType:sortReverse" > 
+  <tr ng-repeat="item in itemsInSet | orderBy:sortCol:sortDesc" > 
     <td ng-repeat="col in colsDisplayed" ng-class="{limeHighlight: item.selected}" >
       {{$parent.item[col]}}
     </td>
     <td>
-      {{checkAction}}<input type="checkbox" ng-model=item.selected ng-click="checkAction(item)" >
+      <!-- <small>{{$parent.checkAction}}</small><input type="checkbox" ng-model=item.selected ng-click="listData[$parent.checkAction](item)" > -->
+      <input type="checkbox" ng-model=item.selected ng-click="$parent.checkAction(item)" >
     </td>
   </tr>
 </table>

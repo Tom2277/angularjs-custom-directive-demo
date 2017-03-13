@@ -1,26 +1,25 @@
 angular
   .module('demo-directive-app')
-  .directive('sortableTable', sortableTable);
+  .directive('tnSortableTable', sortableTable);
 
   function sortableTable(){
     console.log("you hit sortableTable", "=colsDisplayed");
     return {
       restrict: 'E',
-      // transclude: true,
       scope:{
-        // checkAction : "=checkAction",
-        // listData  : "=listData"
+        listData : "=listData"
       },
       templateUrl: 'templates/directives/sortable-table.html',
       link: function(scope, element, attrs){
-        
-                // scope.listData = attrs.listData;
-                scope.itemsInSet = JSON.parse(attrs.itemsInSet);
-                scope.colsDisplayed = attrs.colsDisplayed.split(',');//$eval("=colsDisplayed"),
-                scope.colsLabels = attrs.colsLabels.split(',');
-                scope.checkAction = attrs.checkAction;
-      
-      }
-      
+        scope.colsDisplayed = attrs.colsDisplayed.split(',');
+        scope.colsLabels = attrs.colsLabels.split(',');
+        // scope.defaultSort = scope.$eval(attrs.defaultSort);
+        scope.sortCol = attrs.sortCol;
+        scope.sortDesc = (attrs.sortDesc == "true");
+        scope.itemsInSet = scope.listData.itemsInSet;
+        scope.checkAction = function(item){
+          scope.listData[attrs.checkAction](item);
+        }
+      }  
     };
   };
