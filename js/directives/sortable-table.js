@@ -3,7 +3,6 @@ angular
   .directive('tnSortableTable', sortableTable);
 
   function sortableTable(){
-    console.log("you hit sortableTable", "=colsDisplayed");
     return {
       restrict: 'E',
       scope:{

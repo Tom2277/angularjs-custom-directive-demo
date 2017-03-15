@@ -13,7 +13,6 @@ angular
     function RatingListController($scope, $localStorage, listRankingService){
       var vm = this;
 
-      vm.message = "test message from RatingListController";
       vm.itemsInSet = starTrekChars;
       vm.$storage = $localStorage.$default({
         ratedItems: []
@@ -35,7 +34,6 @@ angular
       };
 
       function addOrRemoveFromRatedItems(selectedItem){
-        console.log("got to controller");
         var matchItem = vm.ratedItems.find(function(e){return e.name === selectedItem.name});
         var index = vm.ratedItems.indexOf(matchItem);
         if (selectedItem.selected && (!matchItem)){
