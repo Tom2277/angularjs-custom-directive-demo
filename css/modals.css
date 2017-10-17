@@ -1,0 +1,61 @@
+.modal-backdrop:target, .modal-backdrop .scroll-trigger {
+  opacity:1;
+  pointer-events: auto;
+}
+
+#modal-backdrop {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+
+#modal-backdrop .show-backdrop{
+  opacity: 1;
+}
+
+.close-modal-button {
+  background: #606061;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -10px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -moz-box-shadow: 1px 1px 3px #000;
+  -webkit-box-shadow: 1px 1px 3px #000;
+  box-shadow: 1px 1px 3px #000;
+}
+
+.close-modal-button:hover { background: #00d9ff; }
+
+
+/*individual-hover-modals*/
+.thank-you-modal {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: pink;
+  background: -moz-linear-gradient(#ffc0cb, #999);
+  background: -webkit-linear-gradient(#ffc0cb, #999);
+  background: -o-linear-gradient(#ffc0cb, #999);
+}
+
+/*some styling from https://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/*/

@@ -7,7 +7,9 @@
   <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/directive-demo.css">
+  <link rel="stylesheet" type="text/css" href="css/modals.css">
   <script src="js/insert-navbar.js"></script>
+  <script src="js/include-html-segment.js"></script>
 
 </head>
 <body>
@@ -33,7 +35,12 @@
       Of course, rich dynamic sites are rarely that simple.
     </p>
 </div>
-  
+  <a href='#openModal'><button>open modal</button></a>
+  <div id="modal-backdrop" class="hide-backdrop">
+    <div data-include-html-segment="thank-you-modal" ></div>
+    <div data-include-html-segment="long-visit-modal" ></div>
+  </div>
+  <div data-include-html-segment="cookie-warning-modal"></div>
 </body>
 </html>
 

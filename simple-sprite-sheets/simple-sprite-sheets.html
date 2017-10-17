@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="spritesheet.js"></script>
+   <style> 
+          .container { position: relative; margin:50px; padding:20px;}
+          .standard-border {border: 1px solid black; display: inline-block; padding: 10px; margin:10px;}
+          .fullsheet{ position: relative; display: inline-block; padding: 0px; background-image: url(spritesheet.png); width:256px; height: 256px;}
+          .tiny-box{padding: 0px; width: 32px; height: 32px; display: inline-block; position: relative; border: 1px solid blue;}
+          .med-box{padding: 0px; width: 64px; height: 64px; display: inline-block; position: relative; border: 1px solid blue;}
+          .ring{  background-image: url(spritesheet.png);
+                  background-position: -0px -96px;
+                }
+          .torch{ background-image: url(spritesheet.png);
+                  background-position: -32px -0px;
+                  height: 32px;
+                  width: 32px;
+                  transform: scale(3.0);
+                  background-repeat: no-repeat;
+                }
+          .tiny-box:hover{color: red; background-image: url(spritesheet.png); background-position: -96px 0px;}
+          .fullsheet{ cursor: url(diamond.png), pointer;}
+          #cowboy-box{padding: 0px; width: 150px; height: 150px; position: fixed; top: 0px; left: 0px;}
+          #cowboy-sprite{width:150px; height: 150px; background-image: url(cowboyTomSprite.png); background-position: 0px 0px;}
+
+         
+  </style>
+</head>
+<body class="container">
+  <div class="fullsheet"></div>
+  <div class="tiny-box ring"></div>
+  <div class="tiny-box"></div>
+  <div class="med-box">
+    <div class="torch"></div>
+  </div>
+  <div class="med-box ring"></div>
+  <div id="cowboy-box" onclick="stopCowboy()">
+    <div id="cowboy-sprite"></div>
+  </div>
+  <button onclick="animateCowboy()">Change Cowboy</button>
+
+</body>
+</html>

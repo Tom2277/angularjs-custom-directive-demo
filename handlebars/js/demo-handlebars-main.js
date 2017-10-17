@@ -5,7 +5,7 @@ $( document ).ready(function() {
 
     $.getJSON('/handlebars/demo-data.json',function(EXTdata, status){
       //store retrieved data within the a global available to helpers
-      //you might need mutiple api calls here to populate working data 
+      //you might need multiple api calls here to populate working data 
       //(see notes in handlebars-sortable-table.js)
       demoHandlebarsData = EXTdata["demoHandlebarsData"];
 

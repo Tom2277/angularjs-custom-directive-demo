@@ -1,0 +1,21 @@
+body{
+  background-color: lightgray;
+}
+
+p {
+  color: red;
+}body a {
+  color: magenta; }
+
+body,
+body h1 {
+  color: blue; }
+
+.navbar-brand img {
+  width: 70px; }
+
+.hello-message {
+  padding: 0px 20px; }
+
+.generic-component {
+  background-color: white; }

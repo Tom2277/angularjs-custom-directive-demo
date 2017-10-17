@@ -1,0 +1,115 @@
+<html>
+<head>
+  <title>Sortable Table Helper Handlebars</title>
+  <script src="/lib/jquery-3.1.1.min.js"></script>
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+  <script src="/handlebars/demo-handlebars-data.js"></script>
+  <script src="/handlebars/js/demo-handlebars-main.js"></script>
+  <script src="/handlebars/js/handlebars-sortable-table-helper.js"></script>
+  <script src="/handlebars/js/helper-rated-list-controller.js"></script>
+  <script src="/handlebars/js/helper-photo-display-controller.js"></script>
+</head>
+<body>
+  <div id="navBar" ></div>
+  <div id="main-content" class="container"></div>
+
+<!-- there are three templates below -->
+<!-- in production, it would be a good idea to precompile these templates on a local development machine -->
+<!-- an alternative would be to keep them in separate template files and use Ajax to compile them all at once -->
+<!-- see old conversation at http://javascriptissexy.com/handlebars-js-tutorial-learn-everything-about-handlebars-js-javascript-templating/ -->
+
+<!-- I am using Bootstrap to setup the page in this demo but the helper works in any layout -->
+<!-- Use the sortableTableHelper helpers as often and wherever you choose  -->
+<!-- I use the "sortableTableHelper" helper 4 times.  -->
+<!-- Separately, I use a naming convention to provide landing zones for the "checkActions" I passed to those tables.   -->
+<!-- Those demo functions show how you could additionally use the helper to insert and update content anywhere on the dom. -->
+
+<script id="for-main" type="text/x-handlebars-template">
+      
+  <div class="col-md-12">  
+    
+
+    
+
+    <div class="col-md-9">
+      
+      <div id="phototable2" >
+      {{sortableTableHelper domContainerID="phototable2" dataKey="friends" colNames="friend,eyeColor,favoriteFruit,company,age" colLabels="My Friends,Eye-Color,Fruit,Works At,Age" sortDefaults="4,false"}}
+      </div>
+    
+    </div>
+
+    {{#each dumb_friends}}
+      <h1>{this.friend}</h1>
+    {{/each}}
+
+  </div>
+      
+</script>
+
+<script id="create-sortable-table" type="text/x-handlebars-template">
+  <table id="all-performer-table" class="table table-bordered table-striped">
+    <thead >
+      <tr>
+      {{#colNames}}
+        <td>
+          <span class="col-sort-header" onclick="sortByCol('{{../domID}}', '{{this}}')">
+            {{lookup ../this.colLabels @index}}
+            {{#ifeq this ../this.orderSetting.[0]}}
+              {{#if ../../this.orderSetting.[1]}}
+                <span class="fa fa-caret-down"></span>
+              {{else}}
+                <span class="fa fa-caret-up"></span>
+              {{/if}}
+            {{/ifeq}}
+          </span>
+        </td>
+      {{/colNames}}
+      {{#if checkAction}}
+        <td class="check-box-label"> 
+        +
+        </td>
+      {{/if}}
+      </tr>
+    </thead> 
+    {{#items}}
+      <tr >
+        {{#each ../colNames}}
+          <td>{{lookup ../this this}}</td>
+        {{/each}}
+        {{#if ../checkAction}}
+          <td>
+            <input type="checkbox" 
+              id="{{../domID}}{{_ID}}"
+              {{#if this.selected}}checked{{/if}}
+              onchange="{{../checkAction}}('{{../domID}}',{{@index}})";
+            >
+          </td>
+        {{/if}}
+      </tr>
+    {{/items}}
+  </table>
+</script>
+
+<script id="rated-list-builder" type="text/x-handlebars-template">
+  <ol class="selected-item-list">
+    {{#each ratedItems}}
+        <li  class="selected-item-rated">
+          <span >{{this.name}}</span>
+          <div class="list-making-tools pull-right" >
+            <span class="glyphicon glyphicon-remove-circle text-danger" onclick="removeFromRatedItems({{@index}},'{{../domID}}')"></span>
+            <span class="glyphicon glyphicon-arrow-down text-warning" onclick="moveDownRatedItems({{@index}},'{{../domID}}')"></span>
+            <span class="glyphicon glyphicon-arrow-up text-success" onclick="moveUpRatedItems({{@index}},'{{../domID}}')"></span>
+          </div>
+        </li>
+    {{/each}}
+  <ol>
+</script>
+
+</body>
+<script src="/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/directive-demo.css">
+</html>  

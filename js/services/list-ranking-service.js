@@ -12,7 +12,7 @@ angular
         return ratedList;
       },
 
-       moveUp: function(selectedItem, ratedList){
+      moveUp: function(selectedItem, ratedList){
         var index = ratedList.indexOf(selectedItem);
         ratedList.splice(index, 1);
         ratedList.splice(index-1, 0, selectedItem);
